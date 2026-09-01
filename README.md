@@ -98,3 +98,8 @@ Three findings shaped the final design:
   empty and the site shows a dash. Request timings are unaffected.
 - **The measurements here are local and illustrative.** The field data in the
   article is not.
+
+
+---
+
+Code and documentation was co-authored with Claude.
