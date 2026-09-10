@@ -47,7 +47,7 @@ and `CDN_TRACE=1` to log CDN connection and request timings to stdout.
 | File | Role |
 | --- | --- |
 | `server.js` | Two HTTP servers, an on-the-fly PNG encoder, and resources with `ttfb`/`dur` timing knobs |
-| `specimens.js` | The 30 specimen documents — the pages actually under test |
+| `specimens.js` | The 31 specimen documents — the pages actually under test |
 | `demos.js` | The 15-demo catalogue: prose, quotes, pairings, what to look for |
 | `views.js` | Hub and demo page rendering |
 | `public/assets/probe.js` | In-page measurement, injected only after `load` |

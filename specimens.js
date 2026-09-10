@@ -519,6 +519,32 @@ def('d08-one-inflight', {
     }),
 });
 
+def('d08-one-inflight-large', {
+  title: 'One request in flight, large image',
+  summary: 'Starting immediately is not the same as finishing first.',
+  html: () =>
+    doc({
+      specimen: 'd08-one-inflight-large',
+      demo: 'tight-mode',
+      subject: 'heavy',
+      title: 'One request in flight, large image',
+      label: 'The same blocking script (1500ms) and the same single in-flight request, but the image is now a large, slow-to-transfer file instead of a 64×64 thumbnail.',
+      head: `
+<script src="${jsUrl({ id: 'slow-blocking', label: 'blocking.js', ttfb: 1500 })}"></script>`,
+      body: `<img src="${imgUrl({ id: 'heavy', hue: 205, marks: 3, w: 1200, h: 675, ttfb: 60, dur: 2200 })}" width="1200" height="675" alt="Large Low priority image">`,
+      tail: `<p class="note">Fewer than two requests are in flight, exactly as in the previous specimen, so the
+        image is still requested immediately &mdash; discovered by the preload scanner and issued right
+        alongside the script. (At 1200&times;675 it may also qualify for Chromium&rsquo;s automatic boost out
+        of <code>Low</code>, described elsewhere on this site; either way, nothing here delays the
+        <em>start</em> of the request.) What changes is the transfer: this file takes 2200ms to arrive, so it
+        is still downloading long after <code>slow-blocking.js</code> (1500ms + a 150ms body) has finished.
+        Compare <strong>Subject image requested</strong> &mdash; early, same as the previous run &mdash;
+        against <strong>Subject image finished</strong>, which now lands after the script instead of before
+        it. Tight mode and the boost both govern when a request is allowed to <em>start</em>; neither has any
+        say over how long the bytes take to arrive.</p>`,
+    }),
+});
+
 /* 09 — No render-blocking scripts ----------------------------------------- */
 
 def('d09-blocking', {

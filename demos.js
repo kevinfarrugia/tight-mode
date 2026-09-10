@@ -210,11 +210,13 @@ const demos = [
     runs: [
       { id: 'd08-two-inflight', label: 'Script + stylesheet (2 in flight)', badge: 'blocked' },
       { id: 'd08-one-inflight', label: 'Script only (1 in flight)', badge: 'open' },
+      { id: 'd08-one-inflight-large', label: 'Script only, large image (1 in flight)', badge: 'variant' },
     ],
     lookFor: [
       'With two in-flight requests, the image is issued at the end of the head, not before.',
       'With one, it overlaps the blocking script from the very beginning and has finished long before the script has.',
       'The difference in <em>Subject image requested</em> — that whole interval is the scheduler, not the network.',
+      'Swap the small image for a large, slow-to-transfer one and it still starts immediately — but now watch <em>Subject image finished</em> land after the script instead of before it. Starting on time and finishing on time are governed by different things.',
     ],
     takeaway:
       'You cannot turn Tight mode off. You can shorten it (fewer blocking resources) or opt a single resource out of it (<code>fetchpriority="high"</code>).',
